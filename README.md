@@ -3,6 +3,12 @@
 一个**零依赖、离线优先**的个人工作台，纯 HTML/CSS/JavaScript 实现，数据保存在浏览器本地。
 代码托管在 GitHub 公开仓库，用于版本管理与多机同步。
 
+**在线预览**：https://dx8060.github.io/personal-workspace/
+**仓库地址**：https://github.com/DX8060/personal-workspace
+
+> 在线版与本地版功能完全一致。数据只写入你当前浏览器的 `localStorage`，不会上传到任何服务器；
+> 换浏览器或清理缓存后需通过「数据与设置 → 导出 / 导入 JSON」迁移。
+
 ---
 
 ## 一、功能概览
@@ -86,7 +92,8 @@ php -S localhost:8080
 `.gitignore` 已排除 `.workbuddy/` 与系统临时文件。因此公开仓库不会泄露使用内容。
 
 - 版本管理与多机同步：`git clone` 后在本地运行 `start.bat` 或直接打开 `index.html`。
-- 如需公网访问：**Settings → Pages** 中选择 `main` 分支根目录发布即可。
+- 公网访问：已启用 GitHub Pages，`main` 分支根目录每次推送后自动发布，
+  地址为 https://dx8060.github.io/personal-workspace/ 。
 - 若后续代码中加入个人配置或密钥，请勿提交，改由本地 `config.local.js` 承载并加入 `.gitignore`。
 
 ---
