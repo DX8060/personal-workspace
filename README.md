@@ -1,7 +1,7 @@
 # 个人工作台 · Personal Workspace
 
 一个**零依赖、离线优先**的个人工作台，纯 HTML/CSS/JavaScript 实现，数据保存在浏览器本地。
-代码托管在 GitHub 私有仓库，用于版本管理与多机同步。
+代码托管在 GitHub 公开仓库，用于版本管理与多机同步。
 
 ---
 
@@ -78,13 +78,16 @@ php -S localhost:8080
 
 ---
 
-## 五、为什么用「私有仓库 + 本地运行」
+## 五、公开仓库 + 本地运行
 
-GitHub Pages 在免费账号下要求仓库为 **Public**。本工作台包含个人任务与笔记，
-因此选择私有仓库做版本管理，本地运行使用，兼顾隐私与零部署成本。
+仓库当前为 **Public**，仅包含程序代码（HTML / CSS / JS），**不含任何个人任务或笔记数据**。
 
-如需公网访问，可将仓库设为 Public 后，在仓库 **Settings → Pages** 中选择
-`main` 分支根目录发布。
+个人数据全部保存在浏览器 `localStorage` 中，属于运行时数据，不会进入仓库；
+`.gitignore` 已排除 `.workbuddy/` 与系统临时文件。因此公开仓库不会泄露使用内容。
+
+- 版本管理与多机同步：`git clone` 后在本地运行 `start.bat` 或直接打开 `index.html`。
+- 如需公网访问：**Settings → Pages** 中选择 `main` 分支根目录发布即可。
+- 若后续代码中加入个人配置或密钥，请勿提交，改由本地 `config.local.js` 承载并加入 `.gitignore`。
 
 ---
 
