@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人工作台 · Personal Workspace</title>
+<meta name="description" content="基于 GitHub 托管的本地个人工作台：任务看板、待办清单、链接收藏与笔记。">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">W</div>
+      <div class="brand-text">
+        <strong>个人工作台</strong>
+        <span>Personal Workspace</span>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="nav-item is-active" data-view="overview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6V11h-6v9zm0-16v5h6V4h-6z"/></svg>
+        <span>总览</span>
+      </button>
+      <button class="nav-item" data-view="board">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h5v16H4zM10.5 4h5v10h-5zM17 4h3v13h-3z"/></svg>
+        <span>任务看板</span>
+      </button>
+      <button class="nav-item" data-view="todo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+        <span>待办清单</span>
+      </button>
+      <button class="nav-item" data-view="links">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z"/></svg>
+        <span>链接收藏</span>
+      </button>
+      <button class="nav-item" data-view="notes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l4 4v14H5V3zm10 1.5V8h3.5L15 4.5zM7 12h10v2H7v-2zm0 4h10v2H7v-2zm0-8h5v2H7V8z"/></svg>
+        <span>笔记</span>
+      </button>
+      <button class="nav-item" data-view="data">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-4 .8v2.1A8 8 0 1 1 4 12H2a10 10 0 1 0 10-10zm1 5h-2v6l5 3 1-1.7-4-2.3V7z"/></svg>
+        <span>数据与设置</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="storage-chip" id="storage-chip">
+        <span class="dot"></span>
+        <span id="storage-label">本地存储已启用</span>
+      </div>
+      <a class="repo-chip" id="repo-chip" href="https://github.com/DX8060/personal-workspace" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
+        <span id="repo-name">DX8060/personal-workspace</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============ 主区域 ============ -->
+  <main class="main">
+    <header class="topbar">
+      <div class="page-head">
+        <h1 id="page-title">总览</h1>
+        <p id="page-sub">—</p>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search" id="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 1 0-.7.7l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+          <input id="search-input" type="search" placeholder="搜索任务、待办、收藏、笔记" autocomplete="off">
+          <kbd>/</kbd>
+        </div>
+        <button class="icon-btn" id="theme-toggle" title="切换浅色 / 深色主题" aria-label="切换主题">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+        </button>
+        <button class="btn btn-primary" id="quick-add">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+          新建
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- 总览 -->
+      <section class="view is-active" id="view-overview">
+        <div class="stat-grid" id="stat-grid"></div>
+
+        <div class="split-2">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>近 7 日完成量</h2>
+              <span class="hint">按任务流转自动统计</span>
+            </div>
+            <div class="chart-wrap" id="activity-chart"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>今日待办</h2>
+              <button class="link-btn" data-goto="todo">全部待办 →</button>
+            </div>
+            <ul class="mini-list" id="today-todos"></ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>进行中的任务</h2>
+            <button class="link-btn" data-goto="board">打开看板 →</button>
+          </div>
+          <div class="mini-cards" id="doing-tasks"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>最近笔记</h2>
+            <button class="link-btn" data-goto="notes">全部笔记 →</button>
+          </div>
+          <div class="note-strip" id="recent-notes"></div>
+        </div>
+      </section>
+
+      <!-- 看板 -->
+      <section class="view" id="view-board">
+        <div class="board" id="board"></div>
+      </section>
+
+      <!-- 待办 -->
+      <section class="view" id="view-todo">
+        <div class="panel">
+          <form class="inline-add" id="todo-form" autocomplete="off">
+            <input id="todo-input" type="text" placeholder="添加一条待办，回车即可保存">
+            <button class="btn btn-primary" type="submit">添加</button>
+          </form>
+          <div class="todo-meta" id="todo-meta"></div>
+          <ul class="todo-list" id="todo-list"></ul>
+          <div class="todo-foot">
+            <button class="link-btn" id="clear-done">清除已完成</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 收藏 -->
+      <section class="view" id="view-links">
+        <div class="toolbar">
+          <div class="filter-row" id="link-filters"></div>
+          <button class="btn btn-ghost" id="add-link">+ 添加收藏</button>
+        </div>
+        <div class="link-grid" id="link-grid"></div>
+      </section>
+
+      <!-- 笔记 -->
+      <section class="view" id="view-notes">
+        <div class="notes-layout">
+          <div class="panel notes-list-panel">
+            <div class="panel-head">
+              <h2>全部笔记</h2>
+              <button class="icon-btn small" id="new-note" title="新建笔记">＋</button>
+            </div>
+            <ul class="notes-list" id="notes-list"></ul>
+          </div>
+          <div class="panel notes-editor-panel">
+            <div class="note-title-row">
+              <input id="note-title" class="note-title-input" type="text" placeholder="无标题笔记">
+              <button class="btn btn-primary btn-sm" id="save-note">保存</button>
+            </div>
+            <textarea id="note-body" class="note-body" placeholder="开始记录…（Ctrl / ⌘ + S 保存）"></textarea>
+            <div class="note-foot">
+              <span id="note-status" class="hint">—</span>
+              <button class="link-btn danger" id="delete-note">删除这条笔记</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 数据与设置 -->
+      <section class="view" id="view-data">
+        <div class="split-2">
+          <div class="panel">
+            <div class="panel-head"><h2>数据管理</h2></div>
+            <div class="panel-body">
+              <p class="muted">所有数据保存在浏览器 localStorage 中，不上传服务器。删除浏览器数据前请先导出备份。</p>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="export-btn">导出 JSON 备份</button>
+                <button class="btn btn-ghost" id="import-btn">导入备份</button>
+                <input type="file" id="import-file" accept="application/json,.json" hidden>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-ghost" id="seed-btn">恢复示例数据</button>
+                <button class="btn btn-danger-ghost" id="reset-btn">清空全部数据</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>仓库信息</h2></div>
+            <div class="panel-body">
+              <dl class="kv">
+                <dt>仓库</dt><dd id="kv-repo">DX8060/personal-workspace</dd>
+                <dt>可见性</dt><dd>私有（Private）</dd>
+                <dt>托管方式</dt><dd>GitHub 版本管理 + 本地运行</dd>
+                <dt>访问协议</dt><dd>file:// 直接打开，或本地 HTTP 服务</dd>
+                <dt>数据规模</dt><dd id="kv-size">—</dd>
+              </dl>
+              <div class="tip-box">
+                <strong>提示：</strong>私有仓库无法启用 GitHub Pages（免费账号限制）。如需公网访问，将仓库转为公开后在 Settings → Pages 中选择 <code>main</code> 分支根目录即可。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ 通用弹窗 ============ -->
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <h3 id="modal-title">标题</h3>
+      <button class="icon-btn small" id="modal-close" aria-label="关闭">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-foot" id="modal-foot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="assets/js/store.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
